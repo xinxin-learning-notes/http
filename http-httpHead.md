@@ -167,4 +167,54 @@ Warning: [警告码] [警告的主机: 端口号] "[警告的内容]" ([日期�
 
 ### Accept
 
+通知服务器，用户代理能够处理的媒体类型以及媒体类型的相对优先级，格式：type/subType，以逗号间隔，一次指定多种格式
 
+可以使用q=..这种格式为媒体类型指定权重，权重值取值范围为0-1，1为最大权重，精确到小数点后3位，服务器会优先返回权重值最高的媒体类型
+
+```json
+Accept: image/webp,image/apng,image/*,*/*;q=0.8
+
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3
+```
+
+### Accept-Charset
+
+通知服务器用户代理支持的字符集，以及字符集相对的优先顺序，也可以一次性指定多种字符集，用逗号分隔，也可以使用q=n，来指定权重
+
+### Accept-Encoding
+
+告知服务器用户代理支持的内容编码以及内容编码的优先级顺序，可以一次性指定多种编码，用逗号分隔，也可以使用q=n来指定权重，也可以使用*作为通配符
+
+```json
+Accept-Encoding: gzip, deflate
+```
+
+### Accept-language
+
+告知服务器用户代理能够处理的自然语言集，以及自然语言集的相对优先级
+
+```json
+Accept-Language: zh-CN,zh;q=0.9
+```
+
+### Authorization
+
+告知服务器用户代理的认证信息
+
+想要通过服务器认证的用户代理在周到401状态码响应后，会把首部字段Authorization加入请求中
+
+### Expect
+
+告知服务器期望出现的某种特定行为，因服务器无法理解客户端的期望作出回应而发生错误时，返回417状态码
+
+### From
+
+告知服务器使用用户代理的用户的电子邮箱
+
+### Host
+
+告知服务器，请求资源所处的互联网主机名和端口号，http/1.1规范哪唯一一个必须包含在内的首部字段
+
+```json
+Host: www.baidu.com
+```
