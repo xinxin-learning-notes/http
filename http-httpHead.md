@@ -218,3 +218,65 @@ Accept-Language: zh-CN,zh;q=0.9
 ```json
 Host: www.baidu.com
 ```
+
+### If-Match
+
+形如 If-xxx这样子的请求，叫做条件请求，服务器接收到附带的条件请求后，判定指定条件为真，才会执行请求
+
+If-Match告知服务器匹配资源所用的实体标记（ETag）值，服务器会比对 If-Match 和 资源的ETag值，两者一致，才会执行请求，否则返回状态码412 Precondition Failed
+
+还可以使用If-Match：*，服务器会忽略ETag值，只要资源存在，就会返回
+
+### If-modified-Since
+
+告知服务器If-modified-Since的字段值早于资源更新的时间，则希望处理请求
+
+否则返回304 Not Modified状态码
+
+### If-None-Match
+
+该字段与If-Match相反，服务器会比对 If-Match 和 资源的ETag值，两者不一致，才会执行请求
+
+### If-Range
+
+如果If-Range值和请求资源的ETag值一样，则作为范围请求处理，否则返回全部资源
+
+### If-Unmodified-Since
+
+与If-modified-Since作用相反，告知服务器，如果要请求的资源，在当前指定的If-Unmodified-Since指定的日期时间之后没有发生更新的情况下，才会处理请求
+
+如果在指定的时间之后发生更新，则返回状态码412 Precondition Failed
+
+### Max-Forwards
+
+通过TRACE方法或者OPTIONS发送包含首部字段Max-Forwards的请求时，Max-Forwards的值以10进制整数形式指定可以经过的服务器足大数目
+
+服务器在往下一个服务器进行转发之前Max-Forwards的值减1，当Max-Forwards为0 的时候不进行转发
+
+### Proxy-Authorization
+
+接收到从代理服务器发来的认证质询的时候，客户端会发送包含首部字段Proxy-Authorization的请求，告知服务器所需要的信息
+
+### Range
+
+对于只需获取部分资源的请求，首部字段Range告知服务器指定资源的范围
+
+服务器接收到带有Range的请求后，处理请求之后返回206 Partial Content响应，如果无法处理该范围的请求，则返回全部的资源，以及200 OK状态码
+
+### Referer
+
+告知服务器请求的原始资源的URI
+
+```json
+Referer: https://www.baidu.com/
+```
+
+### TE
+
+告知服务器客户端能够处理的传输编码方式以及相对优先级
+
+### User-Agent
+
+创建请求的浏览器和用户代理名称等信息传递给服务器
+
+## 响应首部字段
