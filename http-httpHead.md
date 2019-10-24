@@ -405,4 +405,56 @@ Content-Range： bytes 5001-10000 / 10000
 
 Cookie的工作机制是用户识别以及状态管理
 
-当服务器开始管理客户端状态时，会事先告知各种信息，使用setCookie
+当服务器开始管理客户端状态时，会事先告知各种信息，使用首部字段setCookie设置各种值
+
+|属性               |说明
+|NAME=VALUE        |赋予cookie的名称和值
+|expires=DATE      |cookie的有效期，如果不指定值，默认为浏览器关闭前为止
+|path=PATH         |将服务器上的文件目录作为cookie的适用对象，如果不指定，则默认为文档所在的目录
+|domain            |作为cookie适用对象的域名，如果不指定，则默认为创建cookie时的服务器的域名
+|Secure            |仅在https安全通信的时候才会发放cookie
+|httpOnly          |加以限制，使cookie不能被javascript脚本访问
+
+set-cookie: _D_W_I_S_ID_=2de4a6df-67e5-4330-85ab-38b468588ccb; Domain=.dev.hhh.com; Path=/; Max-Age=43200; Expires=Thu, 24-Oct-2019 19:53:27 GMT; HttpOnly
+
+### 首部字段cookie
+
+客户端想获得http状态管理支持，就会发送该首部字段，客户端会发送从服务器接收到的cookie字段值
+
+Cookie: _D_W_I_S_ID_=2de4a6df-67e5-4330-85ab-38b468588ccb
+
+## 其他首部字段
+
+http首部字段是可以自行扩展的，
+
+### X-Frame-Options
+
+该字段属于响应首部字段，用于控制网站内容在其他web网站的frame标签内的显示问题，主要目的为了防止点击劫持攻击
+
+该首部字段可以指定：
+
+DENY： 拒绝
+
+ASAMEORIGIN： 仅同源域名下的页面匹配时允许
+
+### X-XSS-Protection
+
+属于响应首部字段，针对跨站脚本攻击的一种对策，用于控制浏览器XSS防护机制的开关
+
+取值：
+
+0: 将XSS过滤设置成无效状态
+
+1: 将XSS过滤设置成有效状态
+
+### DNT
+
+属于请求首部字段，表示拒绝个人信息被收集表示拒绝被精准广告追踪的一种方法
+
+0: 同意被追踪
+
+1: 不同意被追踪
+
+### P3P
+
+响应首部字段，利用P3P计数，可以让web网站上的个人隐私变成一种仅共程序可理解的形式，达到保护隐私的目的
